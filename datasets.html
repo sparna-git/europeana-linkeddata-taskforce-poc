@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title >Europeana POC</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700|Open+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+
+    <!-- Font Awesome -->    
+    <link rel="stylesheet" href="assets/fa6/css/all.min.css" />
+
+    <style>
+
+      #landing-section {
+        padding-top: 115px;
+        height: auto;
+        overflow: visible;
+      }
+
+      #contact {
+        margin-top:40px;
+        padding: 0px;
+        padding-top: 20px;
+      }
+
+      .datasetCardHeader-selected {
+        background: linear-gradient(45deg, #1de099, #1dc8cd);
+        a {
+          color: black;
+        }
+        /* 
+          background-color: rgb(255, 170, 26);
+          color: black;
+        */
+      }
+
+      #submit-section {
+        padding-top: 45px;
+      }
+
+    </style>
+
+  <!-- /Sparnatural-specific -->
+
+
+  <script id="datasetsTemplate" type="text/x-jsrender">
+
+<div class="container">
+{{for datasets}}
+
+  <div class="col-3" id="source{{:#index}}">
+    <div class="card datasetCard">
+      <div class="card-header datasetCardHeader">
+        <h4 class="card-title"><input type="checkbox" class="selectDatasetCheckbox" data-uri="{{:id}}" data-endpoint="{{:distribution.accessUrl}}" />&nbsp;{{:title.en}}</h4>
+        <p><em>{{:description.en}}</em></p>
+        <p><smaller><a data-toggle="collapse" href="#source{{:#index}}_details">details&nbsp;<i class="fal fa-angle-down"></i></a></smaller></p>        
+      </div> <!-- / .card-header -->
+      
+      <div>                   
+        <div  class="collapse card-body" id="source{{:#index}}_details">
+          <strong>Spatial :</strong><br> <ul class="inline-list">{{for spatial}}<li>{{:prefLabel.en}}</li>{{/for}}</ul>
+          
+          <strong>Temporal :</strong><br> <ul class="inline-list"><li>from {{:temporal.startDate}} to {{:temporal.endDate}}</li></ul>
+          
+          <strong>Keywords :</strong><br> <ul class="inline-list">{{for theme}}<li>{{:prefLabel.en}}</li>{{/for}}</ul>
+        </div>
+      </div><!-- / .card-body -->
+    </div><!-- / .card -->
+  </div><!-- / .col-3 -->
+
+{{else}}
+  <div class="col-12"><h4>No datasets found</h4></div>
+{{/for}}
+</div><!-- / .container -->
+</script>
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex justify-content-between align-items-center">
+
+      <div id="logo">
+        <h1><a href="index.html" data-i18n="page.title"></a></h1>
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link" href="http://sparnatural.eu"><i style="font-size:25px;" class="fa-thin fa-house"></i>&nbsp;Home</a></li>
+          <!--
+          <li class="dropdown"><a href="#"><i style="font-size:25px;" class="fa-thin fa-globe-africa"></i>&nbsp;<span>Lang.</span> <i class="bi bi-chevron-down"></i></a>
+            <ul style="width:80%;">
+              <li><a href="?lang=fr">fr</a></li>
+              <li><a href="?lang=en">en</a></li>
+            </ul>
+          </li>
+          -->
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+    </div>
+  </header><!-- End Header -->
+
+    <!-- ======= Landing Section ======= -->
+    <section id="landing-section">
+      <div class="container">
+
+      </div>
+    </section>
+    <!-- End Landing Section -->
+
+    <!-- ======= Datasets Section ======= -->
+    <section id="datasets-section">
+
+    </section>
+
+    
+
+
+    <section id="submit-section">
+      <div class="container">
+        <div class="row no-gutters">
+          <div class="col-1">
+            <form action="query.html" method="get" style="margin:auto;" name="formsource" id="formsource">
+                <div id="hiddenDatasets">
+                  <!-- here be inserted hidden datasets -->
+                </div>
+              <button class="btn btn-secondary" id="submitDatasets">Explore</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact">
+      <div class="container" data-aos="fade-up">
+        <div class="row">
+
+          <div class="col-lg-2 col-md-2">
+            <div class="contact-about">
+              <a href="http://sparna.fr"><img src="assets/img/sparna.png" style="width:100%;" /></a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="social-links">
+              <a href="mailto:thomas.francart@sparna.fr" ><i class="bi bi-envelope-fill"></i></a>                
+                <a href="http://sparna.fr" ><i class="bi bi-building"></i></a>
+                <a href="http://blog.sparna.fr"><i class="bi bi-journal-text"></i></a>                
+                <a href="https://github.com/sparna-git/Sparnatural"><i class="bi bi-github"></i></a>
+              </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-chevron-up"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/demo.js"></script>
+
+  <!-- Sparnatural-specific -->
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+  <!-- /Sparnatural-specific -->
+
+  <!-- i18n -->
+  <script src="assets/vendor/jquery.i18n/jquery.i18n.js"></script>
+  <script src="assets/vendor/jquery.i18n/jquery.i18n.messagestore.js"></script>
+  <script src="assets/vendor/jquery.i18n/jquery.i18n.fallbacks.js"></script>
+  <script src="assets/vendor/jquery.i18n/jquery.i18n.language.js"></script>
+  <script src="assets/vendor/jquery.i18n/jquery.i18n.parser.js"></script>
+  <script src="assets/vendor/jquery.i18n/jquery.i18n.emitter.js"></script>
+
+  <!-- anchor.js -->
+  <script src="https://cdn.jsdelivr.net/npm/anchor-js/anchor.min.js"></script>
+
+  <!-- JSRender for templating -->
+  <script src="https://www.jsviews.com/download/jsrender.js"></script>
+  <script src="https://www.jsviews.com/download/jsrender.js"></script>
+
+    <script>
+
+      enableDatasetsBehavior = function() {
+        $(".selectDatasetCheckbox").click(function () {
+          if($(this).prop('checked')) {
+            // set selected class on this one
+            $(this).closest(".datasetCardHeader").addClass("datasetCardHeader-selected");
+          } else {
+            $(this).closest(".datasetCardHeader").removeClass("datasetCardHeader-selected");
+          }
+
+          // recompute value of sources
+          $("#hiddenDatasets").html("")
+          $(".selectDatasetCheckbox:checked").each(function( index ) { 
+            $("#hiddenDatasets").append("<input type='hidden' name='dataset' value="+$(this).attr('data-uri')+" />");
+          });
+                    
+          // enable submit button if needed
+          if($(".selectDatasetCheckbox:checked").length > 0) {
+            $('#submitDatasets').attr('disabled', false);
+          } else {
+            $('#submitDatasets').attr('disabled', true);
+          }
+          
+          // retrieve list of endpoints to be queried
+          var endpoints = $('.selectDatasetsCheckbox:checked').map(function() {
+            return $(this).attr('data-endpoint');
+          }).get();
+        });
+      }
+
+      // load datasets from JSON
+      fetch('./datasets.jsonld').then(response => {
+          response.json().then(data => {
+            var datasetsJson = data;
+            console.dir(datasetsJson);
+            // Get compiled template
+            var tmpl = $.templates("#datasetsTemplate"); 
+            var sourcesHtml = tmpl.render(datasetsJson);
+            $("#datasets-section").html(sourcesHtml);
+
+            enableDatasetsBehavior();
+          });
+        }
+      );
+
+      $.urlParam = function(name){
+        var results = new RegExp('[\\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
+        if(results == null) { return null; }
+        return results[1] || 0;
+      }
+      var lang = ($.urlParam('lang') != null)?$.urlParam('lang'):'en';
+
+      anchors.options.placement = 'left';
+      anchors.add();
+
+      $( document ).ready(function() {
+        // set the locale
+        $.i18n( { locale: lang } );  
+        $.i18n().load( {
+            'en': {
+              'page.title': 'Europeana Linked Data Taskforce',
+              'menu.home': 'Sparnatural',
+              'menu.lang': 'Lang.',
+              'menu.github': 'Github',
+            },
+            'fr': {
+              'page.title': 'Europeana Linked Data Taskforce',
+              'menu.home': 'Sparnatural',
+              'menu.lang': 'Lang.',
+              'menu.github': 'Github',
+            }
+        } );  
+        $('body').i18n();
+
+        // disable submit button
+        $('#submitDatasets').attr('disabled', true);
+      });
+
+    </script>
+  </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,186 @@
+{
+  "datasets": [
+    {
+      "id": "http://arsol.univ-tours.fr",
+      "type": "Dataset",
+      "title": {
+        "en" : "ArSol",
+        "fr" : "ArSol"
+      },
+      "creator": {
+        "id": "https://orcid.org/0000-0001-9422-1418",
+        "type": "Person",
+        "mbox": "mailto:olivier.marlet@univ-tours.fr",
+        "name": "Olivier Marlet"
+      },
+      "description": {
+        "fr" : "Archives du Sol - Enregistrement des fouilles archéologiques menées par le Laboratoire Archéologie et Territoire de Tours",
+        "en" : "Archives of the ground - Recordings of the archaeological excavations conducted by the Laboratoire Archéogie et Territoire of Tours"
+      },
+      "issued": "2019-01-01",
+      "language": "http://lexvo.org/id/iso639-2/fra",
+      "modified": "2023-08-01",
+      "publisher": {
+        "id": "http://viaf.org/viaf/148015028",
+        "type": "Organization",
+        "homepage": "http://citeres.univ-tours.fr/lat",
+        "name": "Laboratoire Archéologie et territoires (Tours)"
+      },
+      "source": "http://arsol.univ-tours.fr/",
+      "spatial": {
+        "type": "Location",
+        "prefLabel": {
+            "en" : "Touraine",
+            "fr" : "Touraine"
+        }
+      },
+      "temporal": {
+        "type": "PeriodOfTime",
+        "prefLabel": {
+          "fr" : "Bas-Empire romain",
+          "en" : "Late Empire"
+        },
+        "endDate": "1950",
+        "startDate": "0200"
+      },
+      "contactPoint": "mailto:olivier.marlet@univ-tours.fr",
+      "distribution":     {
+        "id": "http://openarchaeo.huma-num.fr/federation/sources/arsol#distribution",
+        "type": "Distribution",
+        "accessRights": "https://creativecommons.org/licenses/by-nc-sa/3.0/fr/",
+        "format": "https://www.iana.org/assignments/media-types/application/sparql-results+xml",
+        "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/fr/",
+        "accessUrl": "http://openarchaeo.huma-num.fr/explorateur/explorer?source=http%3A%2F%2Fopenarchaeo.huma-num.fr%2Ffederation%2Fsources%2Farsol"
+      },
+      "theme": [
+        {
+          "id": "https://ark.frantiq.fr/ark:/26678/pcrtemrc1fSSWl",
+          "type": "Concept",
+          "thesaurus": "https://ark.frantiq.fr/ark:/26678/TH_1",
+          "prefLabel": {
+            "fr" : "archéologie de terrain",
+            "en" : "field archeology"
+          }
+        }
+      ]
+    }
+  ],
+  "@context": {
+    "id": "@id",
+    "type": "@type",
+    "datasets": "@graph",
+
+    "Dataset": "http://www.w3.org/ns/dcat#Dataset",
+    "Distribution": "http://www.w3.org/ns/dcat#Distribution",
+    "Person": "http://xmlns.com/foaf/0.1/Person",
+    "Organization": "http://xmlns.com/foaf/0.1/Organization",
+    "PeriodOfTime": "http://purl.org/dc/terms/PeriodOfTime",
+    "Location": "http://purl.org/dc/terms/Location",
+    "Concept": "http://www.w3.org/2004/02/skos/core#Concept",
+    "Feature": "https://www.geonames.org/ontology#Feature",
+
+    "accessUrl": "http://www.w3.org/ns/dcat#accessURL",
+    "accessRights" : {
+      "@id" : "http://purl.org/dc/terms/accessRights",
+      "@type": "@id"
+    },
+
+    "conformsTo": {
+      "@id": "http://purl.org/dc/terms/conformsTo",
+      "@type": "@id"
+    },
+    "contactPoint": {
+      "@id": "http://www.w3.org/ns/dcat#contactPoint",
+      "@type": "@id"
+    },
+    "coverage": {
+      "@id": "http://purl.org/dc/terms/coverage",
+      "@type": "@id"
+    },
+    "creator": {
+      "@id": "http://purl.org/dc/terms/creator",
+      "@type": "@id"
+    },
+    "description": {
+      "@id" : "http://purl.org/dc/terms/description",
+      "@container": "@language"
+    },
+    "distribution": {
+      "@id": "http://www.w3.org/ns/dcat#distribution",
+      "@type": "@id"
+    },
+    "endDate": {
+      "@id": "http://schema.org/endDate",
+      "@type": "http://www.w3.org/2001/XMLSchema#gYear"
+    },
+    "format": {
+      "@id": "http://purl.org/dc/terms/format",
+      "@type": "@id"
+    },
+    "homepage": "http://xmlns.com/foaf/0.1/homepage",
+    "issued": {
+      "@id": "http://purl.org/dc/terms/issued",
+      "@type": "http://www.w3.org/2001/XMLSchema#date"
+    },
+    "language": {
+      "@id": "http://purl.org/dc/terms/language",
+      "@type": "@id"
+    },
+    "lat" : {
+      "@id": "http://www.w3.org/2003/01/geo/wgs84_pos#lat",
+      "@type": "http://www.w3.org/2001/XMLSchema#decimal"
+    },
+    
+    "license": {
+      "@id": "http://purl.org/dc/terms/license",
+      "@type": "@id"
+    },
+    "long" : {
+      "@id": "http://www.w3.org/2003/01/geo/wgs84_pos#long",
+      "@type": "http://www.w3.org/2001/XMLSchema#decimal"
+    },
+    "mbox": {
+      "@id": "http://xmlns.com/foaf/0.1/mbox",
+      "@type": "@id"
+    },
+    "modified": {
+      "@id": "http://purl.org/dc/terms/modified",
+      "@type": "http://www.w3.org/2001/XMLSchema#date"
+    },
+    "name": "http://xmlns.com/foaf/0.1/name",
+    "officialName": {
+      "@id" : "https://www.geonames.org/ontology#officialName",
+      "@container": "@language"
+    }, 
+    "prefLabel": {
+      "@id" : "http://www.w3.org/2004/02/skos/core#prefLabel",
+      "@container": "@language"
+    },
+    "publisher": {
+      "@id": "http://purl.org/dc/terms/publisher",
+      "@type": "@id"
+    },
+    "spatial": {
+      "@id": "http://purl.org/dc/terms/spatial",
+      "@type": "@id"
+    },
+    "startDate": {
+      "@id": "http://schema.org/startDate",
+      "@type": "http://www.w3.org/2001/XMLSchema#gYear"
+    },
+    "temporal": {
+      "@id": "http://purl.org/dc/terms/temporal",
+      "@type": "@id"
+    },
+    "theme": {
+      "@id": "http://www.w3.org/ns/dcat#theme",
+      "@type": "@id"
+    },
+    "thesaurus": {
+      "@id": "http://www.w3.org/2004/02/skos/core#inScheme",
+      "@type": "@id"
+    },  
+    "source": "http://purl.org/dc/terms/source", 
+    "title": "http://purl.org/dc/terms/title"
+  }
+}
