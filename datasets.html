@@ -59,13 +59,13 @@
 
   <script id="datasetsTemplate" type="text/x-jsrender">
 
-<div class="container">
-{{for datasets}}
+<div class="container"><div class="row">
+{{for catalog}}
 
   <div class="col-3" id="source{{:#index}}">
     <div class="card datasetCard">
       <div class="card-header datasetCardHeader">
-        <h4 class="card-title"><input type="checkbox" class="selectDatasetCheckbox" data-uri="{{:id}}" data-endpoint="{{:distribution.accessUrl}}" />&nbsp;{{:title.en}}</h4>
+        <h4 class="card-title"><input type="checkbox" class="selectDatasetCheckbox" data-uri="{{:id}}" data-endpoint="{{:endpointURL}}" />&nbsp;{{:title.en}}</h4>
         <p><em>{{:description.en}}</em></p>
         <p><smaller><a data-toggle="collapse" href="#source{{:#index}}_details">details&nbsp;<i class="fal fa-angle-down"></i></a></smaller></p>        
       </div> <!-- / .card-header -->
@@ -74,7 +74,7 @@
         <div  class="collapse card-body" id="source{{:#index}}_details">
           <strong>Spatial :</strong><br> <ul class="inline-list">{{for spatial}}<li>{{:prefLabel.en}}</li>{{/for}}</ul>
           
-          <strong>Temporal :</strong><br> <ul class="inline-list"><li>from {{:temporal.startDate}} to {{:temporal.endDate}}</li></ul>
+          {{if temporal}}<strong>Temporal :</strong><br> <ul class="inline-list"><li>from {{:temporal.startDate}} to {{:temporal.endDate}}</li></ul>{{/if}}
           
           <strong>Keywords :</strong><br> <ul class="inline-list">{{for theme}}<li>{{:prefLabel.en}}</li>{{/for}}</ul>
         </div>
@@ -85,7 +85,7 @@
 {{else}}
   <div class="col-12"><h4>No datasets found</h4></div>
 {{/for}}
-</div><!-- / .container -->
+</div></div><!-- / .container -->
 </script>
 
 </head>
@@ -242,7 +242,6 @@
       fetch('./datasets.jsonld').then(response => {
           response.json().then(data => {
             var datasetsJson = data;
-            console.dir(datasetsJson);
             // Get compiled template
             var tmpl = $.templates("#datasetsTemplate"); 
             var sourcesHtml = tmpl.render(datasetsJson);

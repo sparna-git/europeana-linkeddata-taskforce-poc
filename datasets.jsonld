@@ -1,5 +1,38 @@
 {
-  "datasets": [
+  "catalog": [
+    {
+      "id": "https://sparna-git.github.io/europeana-linkeddata-taskforce-poc/dataset/rijksmuseum",
+      "type": "DataService",
+      "title": {
+        "en" : "Rijksmuseum Collection"
+      },
+      "endpointURL" : "https://sage-ails.ails.ece.ntua.gr/api/content/rijksmuseum-poc/sparql",
+      "description": {
+        "en" : "Lorem ipsum..."
+      }
+    },
+    {
+      "id": "https://sparna-git.github.io/europeana-linkeddata-taskforce-poc/dataset/gooi-en-vecht",
+      "type": "DataService",
+      "title": {
+        "en" : "Gooi en Vecht Historisch"
+      },
+      "endpointURL" : "https://sage-ails.ails.ece.ntua.gr/api/content/gooi-en-vecht-poc/sparql",
+      "description": {
+        "en" : "Lorem ipsum..."
+      }
+    },
+    {
+      "id": "https://sparna-git.github.io/europeana-linkeddata-taskforce-poc/dataset/gelderland",
+      "type": "DataService",
+      "title": {
+        "en" : "Collectie Gelderland"
+      },
+      "endpointURL" : "https://sage-ails.ails.ece.ntua.gr/api/content/gelderland-poc/sparql",
+      "description": {
+        "en" : "Lorem ipsum..."
+      }
+    },
     {
       "id": "http://arsol.univ-tours.fr",
       "type": "Dataset",
@@ -68,10 +101,11 @@
   "@context": {
     "id": "@id",
     "type": "@type",
-    "datasets": "@graph",
+    "catalog": "@graph",
 
     "Dataset": "http://www.w3.org/ns/dcat#Dataset",
     "Distribution": "http://www.w3.org/ns/dcat#Distribution",
+    "Distribution": "http://www.w3.org/ns/dcat#DataService",
     "Person": "http://xmlns.com/foaf/0.1/Person",
     "Organization": "http://xmlns.com/foaf/0.1/Organization",
     "PeriodOfTime": "http://purl.org/dc/terms/PeriodOfTime",
@@ -112,6 +146,10 @@
     "endDate": {
       "@id": "http://schema.org/endDate",
       "@type": "http://www.w3.org/2001/XMLSchema#gYear"
+    },
+    "endpointURL": {
+      "@id": "http://www.w3.org/ns/dcat#endpointURL",
+      "@type": "@id"
     },
     "format": {
       "@id": "http://purl.org/dc/terms/format",
