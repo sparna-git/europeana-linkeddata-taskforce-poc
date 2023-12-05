@@ -207,6 +207,8 @@
   <script src="https://www.jsviews.com/download/jsrender.js"></script>
   <script src="https://www.jsviews.com/download/jsrender.js"></script>
 
+  
+
     <script>
 
       enableDatasetsBehavior = function() {
@@ -221,7 +223,7 @@
           // recompute value of sources
           $("#hiddenDatasets").html("")
           $(".selectDatasetCheckbox:checked").each(function( index ) { 
-            $("#hiddenDatasets").append("<input type='hidden' name='dataset' value="+$(this).attr('data-uri')+" />");
+            $("#hiddenDatasets").append("<input type='hidden' name='endpoint' value="+$(this).attr('data-endpoint')+" />");
           });
                     
           // enable submit button if needed
@@ -232,9 +234,9 @@
           }
           
           // retrieve list of endpoints to be queried
-          var endpoints = $('.selectDatasetsCheckbox:checked').map(function() {
-            return $(this).attr('data-endpoint');
-          }).get();
+          // var endpoints = $('.selectDatasetsCheckbox:checked').map(function() {
+          //  return $(this).attr('data-endpoint');
+          // }).get();
         });
       }
 

@@ -115,6 +115,7 @@
           <div class="col-md-2">
             <label for="select-config" class="form-label">View</label>
             <select class="form-control" style="appearance: auto !important;" id="select-config">
+              <option value="sparnatural-config-EDM.ttl" data-i18n="config.3.title"></option> 
               <option value="sparnatural-config.ttl" data-i18n="config.1.title"></option>
               <option value="sparnatural-config-simplified.ttl" data-i18n="config.2.title"></option>            
             </select>
@@ -202,7 +203,7 @@
 
           <!-- https://xls2rdf.sparna.fr/rest/convert?url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F14Ak0N8fE8kFpmFA0cjApLDvE2BFiNa7ypa2Yk7v1pO4%2Fexport%3Fformat%3Dxlsx&noPostProcessings=true -->
           <spar-natural 
-            src="https://xls2rdf.sparna.fr/rest/convert?url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F14Ak0N8fE8kFpmFA0cjApLDvE2BFiNa7ypa2Yk7v1pO4%2Fexport%3Fformat%3Dxlsx&noPostProcessings=true"
+            src="sparnatural-config-EDM.ttl"
             endpoint="https://sage-ails.ails.ece.ntua.gr/api/content/semanticsearch-digital-repository-of-ireland/sparql"
             lang="en"
             defaultLang="en"
@@ -212,6 +213,7 @@
           ></spar-natural>
 
           <input type="hidden" id="query-json"></input>
+          <input type="hidden" id="query-sparql"></input>
         </div>
 
         <!-- -->
@@ -384,6 +386,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shepherd.js@8.3.1/dist/css/shepherd.css"/>
   <script src="tutorial.js"></script>
 
+  <script src="sparql.js"></script>
+
     <script>
       $.urlParam = function(name){
         var results = new RegExp('[\\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
@@ -417,7 +421,8 @@
             'example.2.title': 'All Statues of Dublin with their Web Pictures',
             'example.3.title': 'All DC Types Sounds of Irish tales',
             'config.1.title': 'Standard view',
-            'config.2.title': 'Simplified view'
+            'config.2.title': 'Simplified view',
+            'config.3.title': 'EDM view'
           },
           'fr': {
             'page.title': 'Europeana Linked Data Taskforce',
@@ -441,10 +446,24 @@
             'example.2.title': 'Toutes les Statues de Dublin avec leurs images',
             'example.3.title': 'Tous les DC Types "sounds" de contes irlandais',
             'config.1.title': 'Vue standard',
-            'config.2.title': 'Vue simplifiée'
+            'config.2.title': 'Vue simplifiée',
+            'config.3.title': 'Vue EDM'
           }
       } );  
       $('body').i18n();
+
+      var urlParams = new URLSearchParams(window.location.search);
+
+      // load endpoints param if present
+      var endpoints;
+      if (urlParams.has("endpoint") === true) {
+        endpoints = urlParams.getAll("endpoint") ;
+      }
+
+      for (const e of endpoints) {
+        console.log("received endpoint "+e);
+      }
+
 
       const sparnatural = document.querySelector("spar-natural");
 
@@ -463,6 +482,8 @@
 
         // save query
         document.getElementById('query-json').value = JSON.stringify(event.detail.queryJson);
+        document.getElementById('query-sparql').value = queryString;
+
 
         // When click on select2 for Sheperd tour
         if (StepToWait3 != null && StepToWait3.isOpen()){
@@ -470,11 +491,75 @@
         }
       });
 
+      
+
       sparnatural.addEventListener("submit", (event) => {
+        console.log("submit received");
         // enable loader on button
-        sparnatural.disablePlayBtn() ; 
-        // trigger the query from YasQE
-        yasqe.query();
+        sparnatural.disablePlayBtn() ;
+
+        const promises = [];
+        for (const e of endpoints) {
+          console.log("querying endpoint "+e);
+
+          var sparqler = new SPARQL.Service(e);
+          var query = sparqler.createQuery();
+          
+          promises[promises.length] = new Promise((resolve, reject) => {
+            query.query(document.getElementById('query-sparql').value,
+            // query.query("SELECT ?pcho WHERE { ?pcho a <http://www.europeana.eu/schemas/edm/ProvidedCHO> } LIMIT 10",
+              {
+                failure: function() { 
+                  console.log("Failed : "+e);
+                  reject("Failed : "+e);
+                },
+                success: function(json) { 
+                  console.log("Got answer from "+e);
+                  // return a structure with "endpoint" key and "sparqlJson" containing the result
+                  resolve({ endpoint: e, sparqlJson: json });
+                }
+              }
+            );
+          });
+        }
+
+        let finalResult = {};
+        Promise.all(promises).then((values) => {
+          // copy the same head as first result, with an extra "endpoint" column
+          finalResult.head = values[0].sparqlJson.head;
+          finalResult.head.vars.push("endpoint");
+
+          // prepare the "results" section
+          finalResult.results = {
+            // same distinct as first result
+            distinct: values[0].sparqlJson.results.distinct,
+            // never ordered
+            ordered: false,
+            // prepare bindings section
+            bindings: []
+          };
+          // then for each SPARQL results of structure {endpoint : xx, sparqlJson: {...}}
+          for (const v of values) {
+            
+            // add an extra "endpoint" column with the endpoint at the end of each binding
+            finalResult.results.bindings.push(
+              // remap each binding to add the endpoint column at the end
+              // then unpack the array
+              ...v.sparqlJson.results.bindings.map(b => {
+                b.endpoint = {type: "uri", value:v.endpoint};
+                return b;
+              })
+            );
+          }
+
+          // send final result to YasR
+          console.dir("Final SPARQL result");
+          console.dir(finalResult);
+          yasr.setResponse(finalResult);
+          // re-enable submit button
+          sparnatural.enablePlayBtn();
+        });
+
       });
 
       sparnatural.addEventListener("reset", (event) => {
@@ -491,15 +576,13 @@
       });
 
       // load ?query= param if present
-      var UrlString = window.location.search;
-      var urlParams = new URLSearchParams(UrlString);
       if (urlParams.has("query") === true) {
         var compressedJson = urlParams.get("query") ;
         var compressCodec = JsonUrl('lzma');
         compressCodec.decompress(compressedJson).then(json => {
           sparnatural.loadQuery(JSON.parse(json)) ;
         });
-      }      
+      }
 
       const yasqe = new Yasqe(document.getElementById("yasqe"), {
         requestConfig: { 
