@@ -204,9 +204,10 @@
           <!-- https://xls2rdf.sparna.fr/rest/convert?url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F14Ak0N8fE8kFpmFA0cjApLDvE2BFiNa7ypa2Yk7v1pO4%2Fexport%3Fformat%3Dxlsx&noPostProcessings=true -->
           <spar-natural 
             src="sparnatural-config-EDM.ttl"
-            endpoint="https://sage-ails.ails.ece.ntua.gr/api/content/semanticsearch-digital-repository-of-ireland/sparql"
+            endpoint="http://dummy.eu/sarql"
+            catalog="datasets.jsonld"
             lang="en"
-            defaultLang="en"
+            defaultLang="nl"
             distinct="true"
             limit="1000"
             debug="true"
@@ -464,8 +465,8 @@
         console.log("received endpoint "+e);
       }
 
-
       const sparnatural = document.querySelector("spar-natural");
+      sparnatural.setAttribute("endpoint", endpoints.join(' '));
 
       if(lang == "fr") { 
         sparnatural.setAttribute("lang", "fr");

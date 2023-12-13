@@ -39,7 +39,7 @@ edm:ProvidedCHO a owl:Class;
   core:tooltip "The subject of the package of data that has been submitted to Europeana."@en,
     "Sujet principal du lot de données qui a été fourni à Europeana."@fr;
   core:order "4"^^xsd:integer;
-  core:defaultLabelProperty dce:title .
+  core:defaultLabelProperty this:providedCHO_defaultLabel .
 
 edm:WebResource a owl:Class;
   rdfs:subClassOf core:NotInstantiatedClass, rdfs:Literal;
@@ -265,8 +265,7 @@ dce:title a owl:ObjectProperty;
   rdfs:domain edm:ProvidedCHO;
   rdfs:range this:Title;
   core:sparqlString "<http://purl.org/dc/elements/1.1/title>";
-  core:enableOptional "true"^^xsd:boolean;
-  core:isMultilingual "true"^^xsd:boolean .
+  core:enableOptional "true"^^xsd:boolean .
 
 this:type a owl:ObjectProperty;
   rdfs:label "type"@en, "type"@fr;
@@ -308,10 +307,17 @@ terms:spatial a owl:ObjectProperty;
   core:sparqlString "<http://purl.org/dc/terms/spatial>";
   core:enableOptional "true"^^xsd:boolean .
 
+this:providedCHO_defaultLabel a owl:ObjectProperty;
+  rdfs:subPropertyOf core:AutocompleteProperty;
+  rdfs:range this:Title;
+  core:sparqlString "<http://purl.org/dc/elements/1.1/title>";
+  core:enableOptional "true"^^xsd:boolean;
+  core:isMultilingual "true"^^xsd:boolean .
+
 this:aggredatedCHO_title a owl:ObjectProperty;
   rdfs:subPropertyOf core:AutocompleteProperty;
   rdfs:range this:Title;
-  core:sparqlString "<http://www.europeana.eu/schemas/edm/aggregatedCHO>/^<http://www.openarchives.org/ore/terms/proxyFor>/<http://purl.org/dc/elements/1.1/title>";
+  core:sparqlString "<http://www.europeana.eu/schemas/edm/aggregatedCHO>/<http://purl.org/dc/elements/1.1/title>";
   core:enableOptional "true"^^xsd:boolean .
 
 this:aggredatedIn a owl:ObjectProperty;
@@ -327,7 +333,7 @@ dce:contributor a owl:ObjectProperty;
   rdfs:subPropertyOf core:AutocompleteProperty;
   rdfs:domain edm:ProvidedCHO;
   rdfs:range edm:Agent;
-  core:sparqlString "^<http://www.openarchives.org/ore/terms/proxyFor>/<http://purl.org/dc/elements/1.1/contributor>";
+  core:sparqlString "<http://purl.org/dc/elements/1.1/contributor>";
   core:enableOptional "true"^^xsd:boolean .
 
 dce:coverage a owl:ObjectProperty;
@@ -335,7 +341,7 @@ dce:coverage a owl:ObjectProperty;
   rdfs:subPropertyOf core:SearchProperty;
   rdfs:domain edm:ProvidedCHO;
   rdfs:range this:Coverage;
-  core:sparqlString "^<http://www.openarchives.org/ore/terms/proxyFor>/<http://purl.org/dc/elements/1.1/coverage>";
+  core:sparqlString "<http://purl.org/dc/elements/1.1/coverage>";
   core:enableOptional "true"^^xsd:boolean .
 
 dce:date a owl:ObjectProperty;
@@ -343,12 +349,7 @@ dce:date a owl:ObjectProperty;
   rdfs:subPropertyOf core:SearchProperty;
   rdfs:domain edm:ProvidedCHO;
   rdfs:range this:Date;
-  core:sparqlString "^<http://www.openarchives.org/ore/terms/proxyFor>/<http://purl.org/dc/elements/1.1/date>";
-  core:enableOptional "true"^^xsd:boolean .
-
-edm:europeanaProxy a owl:ObjectProperty;
-  rdfs:label "europeana proxy"@en;
-  rdfs:domain edm:ProvidedCHO;
+  core:sparqlString "<http://purl.org/dc/elements/1.1/date>";
   core:enableOptional "true"^^xsd:boolean .
 
 terms:isPartOf a owl:ObjectProperty;
@@ -356,12 +357,7 @@ terms:isPartOf a owl:ObjectProperty;
   rdfs:subPropertyOf core:ListProperty;
   rdfs:domain edm:ProvidedCHO;
   rdfs:range this:OtherResource;
-  core:sparqlString "^<http://www.openarchives.org/ore/terms/proxyFor>/<http://purl.org/dc/terms/isPartOf>";
-  core:enableOptional "true"^^xsd:boolean .
-
-ore:lineage a owl:ObjectProperty;
-  rdfs:label "lineage"@en;
-  rdfs:domain edm:ProvidedCHO;
+  core:sparqlString "<http://purl.org/dc/terms/isPartOf>";
   core:enableOptional "true"^^xsd:boolean .
 
 terms:medium a owl:ObjectProperty;
@@ -369,17 +365,7 @@ terms:medium a owl:ObjectProperty;
   rdfs:subPropertyOf core:SearchProperty;
   rdfs:domain edm:ProvidedCHO;
   rdfs:range this:Medium;
-  core:sparqlString "^<http://www.openarchives.org/ore/terms/proxyFor>/<http://purl.org/dc/terms/medium>";
-  core:enableOptional "true"^^xsd:boolean .
-
-ore:proxyFor a owl:ObjectProperty;
-  rdfs:label "proxy for"@en;
-  rdfs:domain edm:ProvidedCHO;
-  core:enableOptional "true"^^xsd:boolean .
-
-ore:proxyIn a owl:ObjectProperty;
-  rdfs:label "proxy in"@en;
-  rdfs:domain edm:ProvidedCHO;
+  core:sparqlString "<http://purl.org/dc/terms/medium>";
   core:enableOptional "true"^^xsd:boolean .
 
 dce:publisher a owl:ObjectProperty;
@@ -387,7 +373,7 @@ dce:publisher a owl:ObjectProperty;
   rdfs:subPropertyOf core:AutocompleteProperty;
   rdfs:domain edm:ProvidedCHO;
   rdfs:range edm:Agent;
-  core:sparqlString "^<http://www.openarchives.org/ore/terms/proxyFor>/<http://purl.org/dc/elements/1.1/creator>";
+  core:sparqlString "<http://purl.org/dc/elements/1.1/creator>";
   core:enableOptional "true"^^xsd:boolean .
 
 dce:rights a owl:ObjectProperty;
@@ -395,7 +381,7 @@ dce:rights a owl:ObjectProperty;
   rdfs:subPropertyOf core:SearchProperty;
   rdfs:domain edm:ProvidedCHO;
   rdfs:range this:Rights;
-  core:sparqlString "^<http://www.openarchives.org/ore/terms/proxyFor>/<http://purl.org/dc/elements/1.1/rights>";
+  core:sparqlString "<http://purl.org/dc/elements/1.1/rights>";
   core:enableOptional "true"^^xsd:boolean .
 
 dce:source a owl:ObjectProperty;
@@ -403,7 +389,7 @@ dce:source a owl:ObjectProperty;
   rdfs:subPropertyOf core:SearchProperty;
   rdfs:domain edm:ProvidedCHO;
   rdfs:range this:OtherResource;
-  core:sparqlString "^<http://www.openarchives.org/ore/terms/proxyFor>/<http://purl.org/dc/elements/1.1/source>";
+  core:sparqlString "<http://purl.org/dc/elements/1.1/source>";
   core:enableOptional "true"^^xsd:boolean .
 
 terms:temporal a owl:ObjectProperty;
@@ -411,7 +397,7 @@ terms:temporal a owl:ObjectProperty;
   rdfs:subPropertyOf core:SearchProperty;
   rdfs:domain edm:ProvidedCHO;
   rdfs:range this:Coverage;
-  core:sparqlString "^<http://www.openarchives.org/ore/terms/proxyFor>/<http://purl.org/dc/terms/temporal>";
+  core:sparqlString "<http://purl.org/dc/terms/temporal>";
   core:enableOptional "true"^^xsd:boolean .
 
 this:list_skosprefLabel_alpha_with_count_langfr a datasources:SparqlDatasource;
