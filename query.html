@@ -465,6 +465,15 @@
         console.log("received endpoint "+e);
       }
 
+      // load datasets from JSON
+      var datasetsJson;
+      fetch('./datasets.jsonld').then(response => {
+          response.json().then(data => {
+            datasetsJson = data;
+          });
+        }
+      );
+
       const sparnatural = document.querySelector("spar-natural");
       sparnatural.setAttribute("endpoint", endpoints.join(' '));
 
@@ -529,6 +538,7 @@
           // copy the same head as first result, with an extra "endpoint" column
           finalResult.head = values[0].sparqlJson.head;
           finalResult.head.vars.push("endpoint");
+          finalResult.head.vars.push("endpoint_label");
 
           // prepare the "results" section
           finalResult.results = {
@@ -548,6 +558,7 @@
               // then unpack the array
               ...v.sparqlJson.results.bindings.map(b => {
                 b.endpoint = {type: "uri", value:v.endpoint};
+                b.endpoint_label = {type: "literal", value:datasetsJson.service.find(s => s.endpointURL == v.endpoint).title[lang]};
                 return b;
               })
             );
