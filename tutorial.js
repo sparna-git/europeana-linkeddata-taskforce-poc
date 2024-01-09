@@ -47,7 +47,7 @@ function initTour() {
   });
   tour.addStep({
     id: 'step--1',
-    text: '<p>The first step is to choose what you are looking for in this list.</p><p>Let\'s imagine you are interested in <em>Italian Painters</em>.</p>',
+    text: '<p>The first step is to choose what you are looking for in this list.</p><p>Let\'s imagine we are looking for <em>cultural objects from a known data provider organization</em>.</p>',
     attachTo: {
       element: 'spar-natural .CriteriaGroup>.StartClassGroup ul.list',
       on: 'right'
@@ -63,13 +63,13 @@ function initTour() {
   });
   tour.addStep({
     id: 'step--2',
-    text: 'What you are looking for are Persons. Select Person from the list.',
+    text: 'What you are looking for are Cultural objects. Select "Cultural object" from the list.',
     attachTo: {
-      element: 'li[data-value="http://ontologies.sparna.fr/sparnatural-demo-dbpedia#Person"]',
+      element: 'li[data-value="http://www.europeana.eu/schemas/edm/ProvidedCHO"]',
       on: 'right'
     },
     advanceOn: {
-      selector: '.StartClassGroup li[data-value="http://ontologies.sparna.fr/sparnatural-demo-dbpedia#Person"]',
+      selector: '.StartClassGroup li[data-value="http://www.europeana.eu/schemas/edm/ProvidedCHO"]',
       event: 'click'
     },
     classes: 'example-step-extra-class',
@@ -77,7 +77,7 @@ function initTour() {
 
   tour.addStep({
     id: 'step--3',
-    text: 'Then you need to select the kind of thing the Person is connected to, from this list.',
+    text: 'Then you need to select the kind of thing the Cultural object is connected to, from this list.',
     attachTo: {
       element: 'spar-natural .CriteriaGroup>.EndClassGroup ul.list',
       on: 'right'
@@ -97,13 +97,13 @@ function initTour() {
 
   tour.addStep({
     id: 'step--4',
-    text: 'As you are interested in <em>Italian Painters</em>, you are looking for a connection between the Person and a Country. Click on Country.',
+    text: 'As you are interested in <em>data providers oranisation</em>, you are looking for a connection between the Cultural object and an Organization. Click on Organization/Agent.',
     attachTo: {
-      element: '.EndClassGroup li[data-value="http://ontologies.sparna.fr/sparnatural-demo-dbpedia#Country"]',
+      element: '.EndClassGroup li[data-value="http://www.europeana.eu/schemas/edm/Agent"]',
       on: 'right'
     },
     advanceOn: {
-      selector: '.EndClassGroup li[data-value="http://ontologies.sparna.fr/sparnatural-demo-dbpedia#Country"]',
+      selector: '.EndClassGroup li[data-value="http://www.europeana.eu/schemas/edm/Agent"]',
       event: 'click'
     },
     classes: 'example-step-extra-class',
@@ -112,7 +112,7 @@ function initTour() {
 
   tour.addStep({
     id: 'step--5',
-    text: 'The next step is to indicate <em>how</em> the Person is related to the Country, by selecting from this list. (Sometimes there is only one possible choice, it will be selected automatically).',
+    text: 'The next step is to indicate <em>how</em> the Cultural object is related to the Organization, by selecting from this list. (Sometimes there is only one possible choice, it will be selected automatically).',
     attachTo: {
       element: 'spar-natural .CriteriaGroup>.ObjectPropertyGroup ul.list',
       on: 'bottom'
@@ -132,13 +132,13 @@ function initTour() {
 
   tour.addStep({
     id: 'step--6',
-    text: 'As you are interested in Italian Painters, this means Persons <em>born in</em> the Country Italy. Select born in from the list.',
+    text: 'As you are interested in <em>data providers</em>, select <em>data provider</em> from the list.',
     attachTo: {
-      element: '.ObjectPropertyGroup li[data-value="http://ontologies.sparna.fr/sparnatural-demo-dbpedia#bornIn"]',
+      element: '.ObjectPropertyGroup li[data-value="http://www.europeana.eu/schemas/edm/dataProvider"]',
       on: 'right'
     },
     advanceOn: {
-      selector: '.ObjectPropertyGroup li[data-value="http://ontologies.sparna.fr/sparnatural-demo-dbpedia#bornIn"]',
+      selector: '.ObjectPropertyGroup li[data-value="http://www.europeana.eu/schemas/edm/dataProvider"]',
       event: 'click'
     },
     classes: 'example-step-extra-class',
@@ -168,7 +168,7 @@ function initTour() {
 
   tour.addStep({
     id: 'step--7',
-    text: 'And then you will be able to indicate that the Country you are interested in is <em>Italy</em>. Click to unfold the list.',
+    text: 'And then you will be able to indicate the Organisation you are interested in. Click to unfold the list.',
     attachTo: {
       element: 'spar-natural .CriteriaGroup>.EndClassGroup>.EditComponents>.WidgetWrapper>.list-widget',
       on: 'left'
@@ -186,7 +186,7 @@ function initTour() {
 
   StepToWait3 = tour.addStep({
     id: 'step--8',
-    text: 'Then search or select <em>Italy</em> in the list (or any other country, actually !)',
+    text: 'Then search or select the organization you would like to select in the list (the actual content of the list depends on the datasets you previously seleted).',
     attachTo: {
       // element: 'spar-natural .CriteriaGroup>.EndClassGroup>.EditComponents>.ObjectPropertyTypeWidget .list-widget',
       element: '.select2-dropdown',
@@ -201,7 +201,7 @@ function initTour() {
 
   tour.addStep({
     id: 'step--9',
-    text: 'You have written your first criteria to search for <em>Persons born in the Country Italy</em> (or whichever you chose from the list) ! Now you need to execute the query.',
+    text: 'You have written your first criteria to search for <em>Cultural object with a known data provider</em> ! Now you need to execute the query.',
     attachTo: {
       element: 'spar-natural .CriteriaGroup',
       on: 'bottom'
@@ -217,7 +217,7 @@ function initTour() {
 
   tour.addStep({
     id: 'step--10',
-    text: 'Click here to execute the query. This will successfully conclude this tutorial. Congratulations ! You can keep playing with Sparnatural and try to add more criterias to your query.',
+    text: 'Click here to execute the query. This will successfully conclude this tutorial. Congratulations ! <br /><br /> After this you can <em>add more criterias</em> to your query by hovering on "Cultural object" and clicking on "And" to add a new line.',
     attachTo: {
       element: '.submitSection a',
       on: 'left'

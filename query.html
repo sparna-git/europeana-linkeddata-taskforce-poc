@@ -58,7 +58,7 @@
       }
 
       #yasr-section {
-        
+        margin-top:10px;
       }
 
       #contact {
@@ -106,21 +106,19 @@
       <div class="container">
 
         <div class="row" style="padding-bottom:10px;">
+          <div class="col-md-6">
+            <label class="form-label">Data sources</label>
+            <div>
+              <span id="endpoints-list"></span> <span style="font-size: 90%;">(<a href="datasets.html">Modify</a>)</span>
+            </div>
+          </div>
           <div class="col-md-1">
             <label for="select-lang" class="form-label">Language</label>
             <select class="form-control" style="appearance: auto !important;" id="select-lang">
               <!-- this is populated automatically based on config -->                
             </select>
           </div>
-          <div class="col-md-2">
-            <label for="select-config" class="form-label">View</label>
-            <select class="form-control" style="appearance: auto !important;" id="select-config">
-              <option value="sparnatural-config-EDM.ttl" data-i18n="config.3.title"></option> 
-              <option value="sparnatural-config.ttl" data-i18n="config.1.title"></option>
-              <option value="sparnatural-config-simplified.ttl" data-i18n="config.2.title"></option>            
-            </select>
-          </div>
-          <div class="col-md-6">
+          <div class="col-md-5">
             <label for="select-examples" class="form-label">Sample query</label>
             <select class="form-control" style="width:100%; appearance: auto !important;" id="select-examples">
               <option value="none" data-i18n="example.placeholder" selected></option>
@@ -129,79 +127,28 @@
               <option value="example.3" data-i18n="example.3.title"></option>
             </select>
           </div>
+          <!--
           <div class="col-md-3">
-            <div style="text-align:right;">
+            <label for="select-examples" class="form-label">Configuration</label>
+            <div>
               <span style="font-size:90%; font-style: italic;"> 
-                <!-- Rijksmuseum : https://sage-ails.ails.ece.ntua.gr/api/content/rijksmuseum-poc/sparql -->
-                <a id="endpoint" href="https://sage-ails.ails.ece.ntua.gr/api/content/semanticsearch-digital-repository-of-ireland/sparql">SPARQL endpoint</a> / <a href="https://docs.google.com/spreadsheets/d/14Ak0N8fE8kFpmFA0cjApLDvE2BFiNa7ypa2Yk7v1pO4">configuration (standard)</a> / <a href="https://docs.google.com/spreadsheets/d/1dAcqxYyZavloNVh5ziZbnGYVLIXrUXd1AYIGVEKRmyU">configuration (simplified)</a>
+                <a href="https://docs.google.com/spreadsheets/d/1Esxpody3AsnB4lI-5QqgMY4DDvJ85TDJEnn2WJhQUA8">link to spreadsheet</a>
               </span>
             </div>
           </div>
+          -->
 
         </div>
-        <!--
-        <div class="row" style="padding-bottom:10px;">
-          <div class="col-md-2">
-            <form>
-              <div class="form-group row">
-                <div class="col-sm-6 gx-0">
-                  <i class="fa-thin fa-globe-africa"></i>&nbsp;<span>Lang.</span>
-                </div>
-                <div class="col-sm-6 gx-2">
-                  <select class="form-control" style="appearance: auto !important;" id="select-lang">               
-                  </select>
-              </div>
-              </div>
-            </form>
-          </div>
-          <div class="col-md-2">
-            <form>
-              <div class="form-group row">
-                <div class="col-sm-5 gx-0">
-                  <i class="fa-thin fa-eye"></i>&nbsp;<span>View:</span>
-                </div>
-                <div class="col-sm-7 gx-2">
-                  <select class="form-control" style="appearance: auto !important;" id="select-config">
-                    <option value="sparnatural-config.ttl" data-i18n="config.1.title"></option>
-                    <option value="sparnatural-config-simplified.ttl" data-i18n="config.2.title"></option>            
-                  </select>
-              </div>
-              </div>
-            </form>
-          </div>
-          <div class="col-md-4">
-            <form>
-              <div class="form-group">
-                <select class="form-control" style="width:100%; appearance: auto !important;" id="select-examples">
-                  <option value="none" data-i18n="example.placeholder" selected></option>
-                  <option value="example.1" data-i18n="example.1.title"></option>
-                  <option value="example.2" data-i18n="example.2.title"></option>
-                  <option value="example.3" data-i18n="example.3.title"></option>
-                </select>
-              </div>
-            </form>
-          </div>
 
-          <div class="col-md-3">
-            <div style="text-align:right;">
-              <span style="font-size:90%; font-style: italic;"> 
-                <- Rijksmuseum : https://sage-ails.ails.ece.ntua.gr/api/content/rijksmuseum-poc/sparql ->
-                <a id="endpoint" href="https://sage-ails.ails.ece.ntua.gr/api/content/semanticsearch-digital-repository-of-ireland/sparql">SPARQL endpoint</a> / <a href="https://docs.google.com/spreadsheets/d/14Ak0N8fE8kFpmFA0cjApLDvE2BFiNa7ypa2Yk7v1pO4/edit#gid=1577547731">configuration</a>
-              </span>
-            </div>
-          </div>
-
+        <div class="row" style="font-style: italic; font-size:0.9em;">
+          <a href="#" id="tutorial"><i id="tutorial-toggle-icon" class="fad fa-question fa-fw"></i>&nbsp; <span data-i18n="tutorial"></a>
         </div>
-      -->
-
-        <!--<div class="row" style="font-style: italic; font-size:0.9em;">
-          <a href="#" id="tutorial"><i id="sparql-toggle-icon" class="fad fa-question fa-fw"></i>&nbsp; <span data-i18n="tutorial"></a>
-        </div> -->
 
         <!-- This is where Sparnatural is inserted -->
         <div class="row">
 
-          <!-- https://xls2rdf.sparna.fr/rest/convert?url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F14Ak0N8fE8kFpmFA0cjApLDvE2BFiNa7ypa2Yk7v1pO4%2Fexport%3Fformat%3Dxlsx&noPostProcessings=true -->
+          <!-- The endpoint is dynamically replaced by the list of endpoints selected -->
+          <!-- configuration live link if needed : https://xls2rdf.sparna.fr/rest/convert?url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1Esxpody3AsnB4lI-5QqgMY4DDvJ85TDJEnn2WJhQUA8%2Fexport%3Fformat%3Dxlsx&noPostProcessings=true -->
           <spar-natural 
             src="sparnatural-config-EDM.ttl"
             endpoint="http://dummy.eu/sarql"
@@ -222,13 +169,13 @@
           <div style="font-style: italic; font-size:0.9em;">
             <a href="#" id="sparql-toggle"><i id="sparql-toggle-icon" class="fad fa-eye fa-fw"></i>&nbsp; <span data-i18n="actions.toggle"></span></a>
             &nbsp;|&nbsp;
-            <a href="#" id="share"><i id="share-icon" class="fad fa-share-square"></i>&nbsp; <span data-i18n="actions.share"></span></a>
             <!--
+            <a href="#" id="share"><i id="share-icon" class="fad fa-share-square"></i>&nbsp; <span data-i18n="actions.share"></span></a>
             &nbsp;|&nbsp;
+            -->
             <a href="#" id="export"><i id="export-icon" class="fad fa-file-export"></i>&nbsp; <span data-i18n="actions.export"></span></a>
             &nbsp;|&nbsp;
             <a href="#" id="import"><i id="import-icon" class="fad fa-file-import"></i>&nbsp; <span data-i18n="actions.import"></span></a>
-            -->
           </div>
         </div>
 
@@ -417,10 +364,10 @@
             'export.modal.close': 'Close',
             'import.modal.title': 'Query as JSON',
             'import.modal.import': 'Import',
-            'example.placeholder': 'Load example query (standard view only)...',
-            'example.1.title': 'All Aggregations under Public Domain License',
-            'example.2.title': 'All Statues of Dublin with their Web Pictures',
-            'example.3.title': 'All DC Types Sounds of Irish tales',
+            'example.placeholder': 'Load example query...',
+            'example.1.title': 'Images of Hollandia ship (Rijkmuseum)',
+            'example.2.title': 'Objects with word "interieur" in their title, with their license and spatial coverage',
+            'example.3.title': 'All objects from a known data provider, will (nearly) all columns to make a CSV export',
             'config.1.title': 'Standard view',
             'config.2.title': 'Simplified view',
             'config.3.title': 'EDM view'
@@ -442,10 +389,10 @@
             'export.modal.close': 'Fermer',
             'import.modal.title': 'Charger une requête en JSON',
             'import.modal.import': 'Charger',
-            'example.placeholder': 'Charger une requête d\'exemple (vue standard seulement)...',
-            'example.1.title': 'Toutes les Vues catalogue sous Licence Domaine Public',
-            'example.2.title': 'Toutes les Statues de Dublin avec leurs images',
-            'example.3.title': 'Tous les DC Types "sounds" de contes irlandais',
+            'example.placeholder': 'Charger une requête d\'exemple...',
+            'example.1.title': 'Images du navire Hollandia (Rijkmuseum)',
+            'example.2.title': 'Objets avec "interieur" dans leur titre, avec leur license et leur couverture spatiale',
+            'example.3.title': 'Tous les objets d\'un fournisseur connu, avec (presque) toutes les colonnes pour faire un export CSV',
             'config.1.title': 'Vue standard',
             'config.2.title': 'Vue simplifiée',
             'config.3.title': 'Vue EDM'
@@ -470,6 +417,14 @@
       fetch('./datasets.jsonld').then(response => {
           response.json().then(data => {
             datasetsJson = data;
+            // populate endpoint list
+            document.getElementById("endpoints-list").innerHTML = endpoints.map(
+              e => {
+                let title = datasetsJson.service.find(s => s.endpointURL == e).title[lang];
+                let url = datasetsJson.service.find(s => s.endpointURL == e).endpointURL;
+                return "<span title='"+url+"'>"+title+"</span>";
+              }
+            ).join(' and ');
           });
         }
       );
@@ -501,13 +456,8 @@
         }
       });
 
-      
 
-      sparnatural.addEventListener("submit", (event) => {
-        console.log("submit received");
-        // enable loader on button
-        sparnatural.disablePlayBtn() ;
-
+      let executeSparql = function(sparql, callback) {
         const promises = [];
         for (const e of endpoints) {
           console.log("querying endpoint "+e);
@@ -535,7 +485,7 @@
 
         let finalResult = {};
         Promise.all(promises).then((values) => {
-          // copy the same head as first result, with an extra "endpoint" column
+          // copy the same head as first result, with extra "endpoint" + "endpoint_label" columns
           finalResult.head = values[0].sparqlJson.head;
           finalResult.head.vars.push("endpoint");
           finalResult.head.vars.push("endpoint_label");
@@ -552,7 +502,7 @@
           // then for each SPARQL results of structure {endpoint : xx, sparqlJson: {...}}
           for (const v of values) {
             
-            // add an extra "endpoint" column with the endpoint at the end of each binding
+            // add extra "endpoint" + "endpoint_label" columns with the endpoint at the end of each binding
             finalResult.results.bindings.push(
               // remap each binding to add the endpoint column at the end
               // then unpack the array
@@ -564,14 +514,25 @@
             );
           }
 
-          // send final result to YasR
-          console.dir("Final SPARQL result");
-          console.dir(finalResult);
-          yasr.setResponse(finalResult);
-          // re-enable submit button
-          sparnatural.enablePlayBtn();
+          // call the callback with the final aggregated SPARQL result
+          callback(finalResult);
         });
 
+      }
+
+      sparnatural.addEventListener("submit", (event) => {
+        // enable loader on button
+        sparnatural.disablePlayBtn() ;
+
+        let finalResult = executeSparql(
+          document.getElementById('query-sparql').value,
+          (finalResult) => {
+            // send final result to YasR
+            yasr.setResponse(finalResult);
+            // re-enable submit button
+            sparnatural.enablePlayBtn();
+          }
+        );
       });
 
       sparnatural.addEventListener("reset", (event) => {
@@ -598,10 +559,11 @@
 
       const yasqe = new Yasqe(document.getElementById("yasqe"), {
         requestConfig: { 
-          endpoint: $('#endpoint').attr("href"),
+          endpoint: endpoints[0],
           method: "GET",
           header: {}
         },
+        showQueryButton: (endpoints.length == 1),
         copyEndpointOnNewTab: false  
       });
 
@@ -624,6 +586,8 @@
         maxPersistentResponseSize: 0
       });
 
+      // yasqe
+
       // link yasqe and yasr
       yasqe.on("queryResponse", function(_yasqe, response, duration) {
         yasr.setResponse(response, duration);
@@ -643,6 +607,7 @@
         return false;        
       } ;
 
+      /*
       document.getElementById('share').onclick = function() {
         var compressCodec = JsonUrl('lzma');
         compressCodec.compress(document.getElementById('query-json').value).then(result => {
@@ -653,8 +618,8 @@
           $('#shareModal').modal('show');
         });
       }
+      */
       
-      /*  
       document.getElementById('export').onclick = function() {
           var jsonString = JSON.stringify(
               JSON.parse(document.getElementById('query-json').value),
@@ -668,7 +633,6 @@
       document.getElementById('import').onclick = function() {
           $('#importModal').modal('show');       
       } 
-      */
 
       document.getElementById('importButton').onclick = function() {
           var json = JSON.parse($('#import-json').val());
@@ -695,6 +659,7 @@
         $('body').i18n();
       }
 
+      /*
       document.getElementById('select-config').onchange = function() {
         var config = $('#select-config option:selected').val();
         sparnatural.setAttribute("src", config);
@@ -703,6 +668,12 @@
         } else {
           document.getElementById('select-examples').disabled = true;
         }
+      }
+      */
+
+      document.getElementById('tutorial').onclick = function() {
+        sparnatural.clear();
+        initTour();
       }
 
     </script>

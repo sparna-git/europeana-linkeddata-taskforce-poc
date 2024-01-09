@@ -67,8 +67,8 @@ skos:Concept a owl:Class;
 
 edm:Agent a owl:Class;
   rdfs:subClassOf rdfs:Literal;
-  rdfs:label "Agent"@en, "Personne"@fr;
-  core:faIcon "fa-regular fa-user-large";
+  rdfs:label "Organization / Agent"@en, "Organisation / Agent"@fr;
+  core:faIcon "fa-regular fa-landmark";
   core:order "3"^^xsd:integer .
 
 edm:Place a owl:Class;
@@ -82,12 +82,6 @@ edm:TimeSpan a owl:Class;
   rdfs:label "Time Span"@en, "Période"@fr;
   core:faIcon "fa-regular fa-hourglass";
   core:order "11"^^xsd:integer .
-
-foaf:Organization a owl:Class;
-  rdfs:subClassOf rdfs:Literal;
-  rdfs:label "Organization"@en, "Centre culturel"@fr;
-  core:faIcon "fa-regular fa-landmark";
-  core:order "3"^^xsd:integer .
 
 this:Aggregator a owl:Class;
   rdfs:subClassOf rdfs:Literal;
@@ -139,13 +133,13 @@ this:Type a owl:Class;
 
 this:Provenance a owl:Class;
   rdfs:subClassOf rdfs:Literal;
-  rdfs:label "Provenance (RM)"@en, "Donateur (RM)"@fr;
+  rdfs:label "Provenance"@en, "Donateur"@fr;
   core:faIcon "fa-regular fa-hand-holding";
   core:order "10"^^xsd:integer .
 
 this:Extent a owl:Class;
   rdfs:subClassOf rdfs:Literal;
-  rdfs:label "Extent (RM)"@en, "Dimensions (RM)"@fr;
+  rdfs:label "Extent"@en, "Dimensions"@fr;
   core:faIcon "fa-regular fa-ruler-horizontal";
   core:order "9"^^xsd:integer .
 
@@ -175,7 +169,7 @@ edm:dataProvider a owl:ObjectProperty;
   rdfs:label "data provider"@en, "est fournie par"@fr;
   rdfs:subPropertyOf core:ListProperty;
   rdfs:domain edm:ProvidedCHO;
-  rdfs:range foaf:Organization;
+  rdfs:range edm:Agent;
   core:sparqlString "^<http://www.europeana.eu/schemas/edm/aggregatedCHO>/<http://www.europeana.eu/schemas/edm/dataProvider>";
   core:enableOptional "true"^^xsd:boolean .
 
@@ -188,10 +182,10 @@ edm:isShownAt a owl:ObjectProperty;
   core:enableOptional "true"^^xsd:boolean .
 
 edm:provider a owl:ObjectProperty;
-  rdfs:label "provider"@en, "est issue de"@fr;
+  rdfs:label "aggregator"@en, "aggrégateur"@fr;
   rdfs:subPropertyOf core:ListProperty;
   rdfs:domain edm:ProvidedCHO;
-  rdfs:range this:Aggregator;
+  rdfs:range edm:Agent;
   core:sparqlString "^<http://www.europeana.eu/schemas/edm/aggregatedCHO>/<http://www.europeana.eu/schemas/edm/provider>";
   core:enableOptional "true"^^xsd:boolean .
 
@@ -267,16 +261,24 @@ dce:title a owl:ObjectProperty;
   core:sparqlString "<http://purl.org/dc/elements/1.1/title>";
   core:enableOptional "true"^^xsd:boolean .
 
-this:type a owl:ObjectProperty;
-  rdfs:label "type"@en, "type"@fr;
+dce:type a owl:ObjectProperty;
+  rdfs:label "type"@en, "de type"@fr;
   rdfs:subPropertyOf core:ListProperty;
   rdfs:domain edm:ProvidedCHO;
   rdfs:range this:Type;
-  core:sparqlString "(<http://purl.org/dc/elements/1.1/type>|<http://www.europeana.eu/schemas/edm/type>)";
+  core:sparqlString "<http://purl.org/dc/elements/1.1/type>";
+  core:enableOptional "true"^^xsd:boolean .
+
+edm:type a owl:ObjectProperty;
+  rdfs:label "EDM type"@en, "de type EDM"@fr;
+  rdfs:subPropertyOf core:ListProperty;
+  rdfs:domain edm:ProvidedCHO;
+  rdfs:range this:Type;
+  core:sparqlString "<http://www.europeana.eu/schemas/edm/type>";
   core:enableOptional "true"^^xsd:boolean .
 
 terms:created a owl:ObjectProperty;
-  rdfs:label "created"@en, "créé en"@fr;
+  rdfs:label "creation date"@en, "créé le"@fr;
   rdfs:subPropertyOf core:SearchProperty;
   rdfs:domain edm:ProvidedCHO;
   rdfs:range this:Date;
@@ -320,14 +322,6 @@ this:aggredatedCHO_title a owl:ObjectProperty;
   core:sparqlString "<http://www.europeana.eu/schemas/edm/aggregatedCHO>/<http://purl.org/dc/elements/1.1/title>";
   core:enableOptional "true"^^xsd:boolean .
 
-this:aggredatedIn a owl:ObjectProperty;
-  rdfs:label "aggregated in"@en, "présenté dans"@fr;
-  rdfs:subPropertyOf core:NonSelectableProperty;
-  rdfs:domain edm:ProvidedCHO;
-  rdfs:range ore:Aggregation;
-  core:sparqlString "^<http://www.europeana.eu/schemas/edm/aggregatedCHO>";
-  core:enableOptional "true"^^xsd:boolean .
-
 dce:contributor a owl:ObjectProperty;
   rdfs:label "contributor"@en, "contributeur"@fr;
   rdfs:subPropertyOf core:AutocompleteProperty;
@@ -345,7 +339,7 @@ dce:coverage a owl:ObjectProperty;
   core:enableOptional "true"^^xsd:boolean .
 
 dce:date a owl:ObjectProperty;
-  rdfs:label "significant date"@en, "date associée"@fr;
+  rdfs:label "other date"@en, "autre date"@fr;
   rdfs:subPropertyOf core:SearchProperty;
   rdfs:domain edm:ProvidedCHO;
   rdfs:range this:Date;
